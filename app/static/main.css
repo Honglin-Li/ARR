@@ -1,0 +1,98 @@
+/* Because only 2 web pages, I write all the css in one file */
+.placeholder {
+    height:60px;
+}
+
+/* Reviewer List */
+div.reviewer {
+    background-color:#fcf8f7;
+}
+div.reviewer a {
+    color:#8c1b13;
+}
+div.reviewer:hover {
+    background-color:DodgerBlue;
+    color:white;
+}
+div.reviewer:hover a {
+    color:white;
+    text-decoration-line:none;
+    font-weight: bold;
+}
+/* Pager */
+ul.pagination a {
+    color: black;
+}
+ul.pagination a {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  margin: 1px;
+}
+.pagination .active a {
+  background-color: White;
+  border-color: White;
+  color:DodgerBlue;
+  font-weight:bold;
+  text-decoration-line:none;
+}
+.pagination li:hover:not(.active) a {
+    background-color: #ddd;
+    text-decoration-line:none;
+}
+
+/* Review List */
+.review {
+    border:solid 1px LightGrey;
+}
+.review-content {
+    font-size:14px;
+}
+.review-title {
+    color:#2c3a4a;
+    font-weight: bold;
+    margin-left:-15px;
+}
+.review-subtitle {
+    color:#8c1b13;
+    font-weight: bold;
+}
+/* Date Filter */
+.date-filter {
+    border-radius: 5px;
+    color: #2c3a4a;
+    font-size: 18px;
+}
+.date-filter #year, #month {
+    border-color: DodgerBlue;
+}
+/* Reviewer Profile */
+.reviewer-profile .card-header {
+    font-weight:bold;
+    font-size:24px;
+    color:#8c1b13;
+}
+.reviewer-profile .list-group-item {
+    float:right;
+    display:inline;
+}
+ul.profile {
+    list-style-type: none;
+    overflow: hidden;
+    margin:0;
+    padding:0;
+}
+
+.profile li {
+    float: left;
+    padding: 5px 10px;
+    margin:2px 5px;
+    background-color:#edfdcf;
+    border-radius: 7px;
+}
+/* plot */
+#review-plot {
+    width:330px;
+    height:250px;
+    margin-top:15px;
+}
+

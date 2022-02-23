@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "bootstrap/pagination.html" import render_pagination %}
+
+{% block page_content %}
+    <!-- Search Bar -->
+
+
+
+    <!-- Reviewers List -->
+    {% if reviewers %}
+    <!-- Show Reviewers List -->
+    <div class="card-columns p-3">
+        {% for reviewer in reviewers %}
+          <div class="reviewer card p-3 text-center">
+            <div class="card-body">
+              <h5 class="card-title">
+                  <a href="{{ url_for('main.reviewer', reviewer_id=reviewer.id) }}">
+                    {{ reviewer.name }}
+                  </a>
+              </h5>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+
+    {% if pagination %}
+    <div class="m-5 row justify-content-center">
+        {{render_pagination(pagination)}}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <h4  class="m-5">No Reviewers</h4>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,70 @@
+  <!-- Reviewer List -->
+<ul class="reviews list-unstyled">
+    {% for review in reviews %}
+        <li class="review bg-light mt-2 p-3">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h{{ review.id }}" aria-controls="h{{ review.id }}" aria-expanded="false" aria-label="Toggle navigation">
+                <h4 class="review-title" >Official Review of {{ review.invitation.split('/')[5] }}</h4>
+            </button>
+            <div class="float-right">#{{ loop.index }}/{{ reviews | count}} </div>
+            <div class="text-muted">
+                <p><a href="https://openreview.net/forum?id={{ review.paper_id }}" target='_blank' >
+                    Click to the corresponding paper
+                </a>(paper submitted in year: {{review.year}}, month: {{review.month}})</p>
+                <p>review submitted on : {{ moment(review.timestamp).format('LL') }}</p>
+            </div>
+            <div class="collapse show review-content" id="h{{ review.id }}">
+                <div class="m-2">
+                <span class="review-subtitle">Paper Summary: </span>
+                <div>{{ review.paper_summary.replace('\n', '<br />') | safe }}</div>
+                </div>
+
+                <div class="m-2">
+                <span class="review-subtitle">Summary Of Strengths: </span>
+                <div>{{ review.summary_of_strengths.replace('\n', '<br />') | safe }}</div>
+                </div>
+
+                <div class="m-2">
+                <span class="review-subtitle">Summary Of Weaknesses: </span>
+                <div>{{ review.summary_of_weaknesses.replace('\n', '<br />') | safe }}</div>
+                </div>
+
+                <div class="m-2">
+                <span class="review-subtitle">Comments, Suggestions And Typos: </span>
+                <div>{{ review.comments_suggestions_and_typos.replace('\n', '<br />') | safe }}</div>
+                </div>
+
+                <div class="m-2">
+                    <div>
+                        <span class="review-subtitle">Overall Assessment: </span>
+                        {{ review.overall_assessment }}
+                    </div>
+                </div>
+                <div class="m-2">
+                    <div><span class="review-subtitle">Confidence: </span> {{ review.confidence }} </div>
+                </div>
+                <div class="m-2">
+                    <div><span class="review-subtitle">Best Paper: </span> {{ review.best_paper }} </div>
+                </div>
+                {% if review.reproducibility %}
+                <div class="m-2">
+                    <div><span class="review-subtitle">Replicability: </span> {{ review.reproducibility }} </div>
+                </div>
+                {% endif %}
+                <div class="m-2">
+                    <div><span class="review-subtitle">Datasets: </span>{{ review.datasets }} </div>
+                </div>
+                <div class="m-2">
+                    <div><span class="review-subtitle">Software: </span>{{ review.software }} </div>
+                </div>
+                <div class="m-2">
+                    <div><span class="review-subtitle">Author Identity Guess: </span> {{ review.author_identity_guess }}</div>
+                </div>
+                {% if review.needs_ethics_review %}
+                <div class="m-2">
+                    <span class="review-subtitle">Needs Ethics Review</span> <div>{{ review.needs_ethics_review }}</div>
+                </div>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>

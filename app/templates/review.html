@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}{{ reviewer.name }} Page {% endblock %}
+
+{% block page_content %}
+  <!-- 2 column layout -->
+  <!-- Basic Info -->
+<div class="row">
+  <div class="col-lg-4 mt-4">
+<div class="card reviewer-profile">
+  <div class="card-header">
+    {{ reviewer.name }}
+  </div>
+
+  <div class="card-body">
+
+    <ul class="profile">
+      <li>
+        Number of Reviews:
+        <span class="badge bg-warning text-dark">{{ reviewer.reviews.count() }}</span>
+      </li>
+      <li>
+        Number of Assigned Reviews:
+        <span class="badge bg-warning text-dark">{{ reviewer.assignments.count() }}</span>
+      </li>
+      <li>
+        Average Number of Characters:
+        <span class="badge bg-warning text-dark">{{ reviewer.avg_chars_count[0] | int }}</span>
+      </li>
+      <li>
+        Average Number of Words:
+        <span class="badge bg-warning text-dark">{{ reviewer.avg_words_count[0] | int }}</span>
+      </li>
+    </ul>
+
+    <!-- Unfulfilled Review Assignments -->
+    <h5 class="mt-4 pt-3 border-top">Unfulfilled Review Assignments</h5>
+    {% if reviewer.unfulfilled_assignments %}
+    <ul class="profile">
+      {% for ass in reviewer.unfulfilled_assignments %}
+      <li>
+        <a href="https://openreview.net/forum?id={{ ass }}" target='_blank'>{{ ass }}</a></li>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>The reviewer finished all the review assignments.</p>
+    {% endif %}
+
+    <!-- Chart -->
+    <h5 class="mt-4 pt-3 border-top">Number of Reviews over cycles</h5>
+    <div id="review-plot"></div>
+
+
+  </div>
+</div>
+
+</div>
+  <!-- right column -->
+  <div class="col-lg-8 mt-4">
+  <!-- Year Month Filter -->
+<div class="date-filter row mx-2 justify-content-start">
+
+    <form class="form-inline my-lg-0" method="POST">
+      {{ filter_form.csrf_token }}
+        <span>Filter Reviews by &nbsp; </span>
+        <span>Year:</span>
+        {{ filter_form.year(class='form-control form-control-sm m-sm-2') }}
+        <span>Month:</span>
+        {{ filter_form.month(class='form-control form-control-sm m-sm-2') }}
+      {{ filter_form.submit(class="btn btn-primary btn-sm") }}
+        <a type="button" class="btn btn-primary btn-sm mx-2"
+           href="{{ url_for('main.reviewer', reviewer_id=reviewer.id) }}">Show All Reviews</a>
+    </form>
+</div>
+
+  <!-- Reviewer List -->
+{% if reviews %}
+  {% include '_review_list.html' %}
+{% else %}
+  <h4 class="m-5">{{ reviewer.name}} has no reviews for this cycle.
+    You can click "Show All Reviews" button to see all the reviewer's reviews.</h4>
+{% endif %}
+</div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('review-plot'), 'light');
+
+        // config
+        var option = {
+            title: {
+            show: false,
+            text: 'Number of Reviews over cycles'
+            },
+            tooltip: {},
+            legend: {
+                data:['Reviews']
+            },
+            xAxis: {
+                data: ["{{ x[9] }}","{{ x[8] }}","{{ x[7] }}","{{ x[6] }}","{{ x[5] }}","{{ x[4] }}","{{ x[3] }}","{{ x[2] }}","{{ x[1] }}","{{ x[0] }}"]
+            },
+            yAxis: {},
+            series: [{
+                name: 'reviews',
+                type: 'bar',
+                data: [{{ y[9] }},{{ y[8] }},{{ y[7] }},{{ y[6] }},{{ y[5] }},{{ y[4] }},{{ y[3] }},{{ y[2] }},{{ y[1] }},{{ y[0] }},]
+            }]
+        };
+
+        // show plot
+        myChart.setOption(option);
+    </script>
+{% endblock %}

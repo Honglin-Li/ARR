@@ -1,0 +1,70 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+{{ moment.include_moment() }}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+{% endblock %}
+
+{% block title %}ARR Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='main.css')}}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+      integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='images/ARR.png')}}">
+{% endblock %}
+
+
+{% block navbar %}
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+  <div class="container">
+  <a class="navbar-brand" href="/">
+    <img src="{{url_for('static', filename='images/ARR.png')}}" width="30" height="30"
+         class="d-inline-block align-top" alt="click to home page">
+    ARR Dashboard
+  </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Home </a>
+    </div>
+      <!-- Review Search Form -->
+    <form class="d-flex" method="POST">
+      {{ form.csrf_token }}
+      {{ form.search_text(class='form-control mr-sm-2', placeholder='input reviewer name') }}
+      {{ form.submit(class="btn btn-warning my-2 my-sm-0") }}
+    </form>
+
+  </div>
+
+  </div>
+</nav>
+
+<div class="placeholder"> </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% block page_content %}
+
+  {% endblock %}
+</div>
+
+<!-- Footer -->
+<footer class="p-4 border-top">
+  <div class="container  align-items-center text-center">
+    <p class="text-muted"> &copy; 2022 HL all rights reserved. </p>
+  </div>
+</footer>
+{% endblock %}
