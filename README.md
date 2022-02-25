@@ -1,5 +1,3 @@
-[toc]
-
 # Introduction
 
 [You can see the demo video here](https://youtu.be/ASGLjmLZUbY)
