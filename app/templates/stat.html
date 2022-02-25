@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "bootstrap/pagination.html" import render_pagination %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='css/stat.css')}}">
+{% endblock %}
+
+
+{% block page_content %}
+    <!-- Reviewer stat -->
+    <div class="stat mb-5">
+    <h2 class="blue">
+        <img src="{{url_for('static', filename='images/reviewer.png')}}" width="48" height="48"
+         class="d-inline-block align-top">
+        Reviewer Statistics
+    </h2>
+
+    <div class="row">
+          <div class="col-sm-6 col-lg-4">
+              <h3>
+                  Total Reviewers:
+              </h3>
+                <p>{{ stat_data['reviewer_count'] }}</p>
+          </div>
+
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Reviews per Reviewer:
+              </h3>
+                <p>{{ stat_data['reviews_per_reviewer'] }}</p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Reviewer stat -->
+    <div class="stat mb-5">
+    <h2 class="purple">
+        <img src="{{url_for('static', filename='images/review.png')}}" width="48" height="48"
+         class="d-inline-block align-top">
+        Review Statistics
+    </h2>
+
+    <div class="row">
+          <div class="col-sm-6 col-md-4">
+              <h3>
+                  Submissions:
+              </h3>
+                <p>{{ stat_data['review_count'] }}</p>
+          </div>
+
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Assignments:
+              </h3>
+                <p>{{ stat_data['assign_count'] }}</p>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Average Submissions per cycle:
+              </h3>
+                <p>{{ stat_data['avg_reviews'] }}</p>
+          </div>
+
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Average Number of Words:
+              </h3>
+                <p>{{ stat_data['avg_words'] }}</p>
+        </div>
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Average Number of Characters:
+              </h3>
+                <p>{{ stat_data['avg_chars'] }}</p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- cycle list -->
+    <div class="stat mb-5">
+    <h2 class="green">
+        <img src="{{url_for('static', filename='images/bar.png')}}" width="48" height="48"
+         class="d-inline-block align-top">
+        Check Individual Cycle Statistics
+    </h2>
+        <p class="text-muted">Click on the cycle you want to check more</p>
+
+    <div class="card-columns">
+        {% for cycle in cycles %}
+        <div class="card p-3">
+            <div class="card-body">
+              <h5 class="card-title">
+                  <a href="{{ url_for('main.cycle_stats', cycle=cycle['cycle']) }}">
+                    {{ cycle['cycle'] }} &nbsp; Statistics
+                  </a>
+              </h5>
+                <p class="card-text">
+                    Submissions: {{ cycle['submissions'] }}
+                </p>
+                <p class="card-text">
+                    Assignments: {{ cycle['assignments'] }}
+                </p>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+
+
+    </div>
+
+{% endblock %}

@@ -2,7 +2,7 @@
 <ul class="reviews list-unstyled">
     {% for review in reviews %}
         <li class="review bg-light mt-2 p-3">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h{{ review.id }}" aria-controls="h{{ review.id }}" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#h{{ review.id }}" aria-controls="h{{ review.id }}" aria-expanded="false" aria-label="Toggle">
                 <h4 class="review-title" >Official Review of {{ review.invitation.split('/')[5] }}</h4>
             </button>
             <div class="float-right">#{{ loop.index }}/{{ reviews | count}} </div>

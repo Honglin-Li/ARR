@@ -1,4 +1,5 @@
 from app import db
+from sqlalchemy import and_, func
 
 
 class Review(db.Model):
@@ -31,3 +32,29 @@ class Review(db.Model):
     software = db.Column(db.String)
     summary_of_strengths = db.Column(db.Text)
     summary_of_weaknesses = db.Column(db.Text)
+
+    @staticmethod
+    def get_avg_word_count(year=0, month=0):
+        if year:
+            return db.session.query(func.avg(Review.word_len)).filter(and_(Review.year == year, Review.month == month)).one()
+        return db.session.query(func.avg(Review.word_len)).one()
+
+    @staticmethod
+    def get_avg_char_count(year=0, month=0):
+        if year:
+            return db.session.query(func.avg(Review.char_len)).filter(and_(Review.year == year, Review.month == month)).one()
+        return db.session.query(func.avg(Review.char_len)).one()
+
+    @staticmethod
+    def get_avg_count_by_cycle():
+        cycle_number = db.session.query(Review.year, Review.month).distinct().count()
+        print(cycle_number)
+        return int(Review.get_total_count() / cycle_number)
+
+    @staticmethod
+    def get_total_count():
+        return Review.query.count()
+
+    @staticmethod
+    def get_cycle_review_count(year, month):
+        return Review.query.filter(and_(Review.year == year, Review.month == month)).count()

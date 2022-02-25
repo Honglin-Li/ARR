@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "bootstrap/pagination.html" import render_pagination %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='css/stat.css')}}">
+{% endblock %}
+
+
+{% block page_content %}
+
+    <!-- cycle stat -->
+    <div class="stat mb-5">
+    <h2 class="purple">
+        <img src="{{url_for('static', filename='images/review.png')}}" width="48" height="48"
+         class="d-inline-block align-top">
+        Statistics
+    </h2>
+
+    <div class="row">
+          <div class="col-sm-6 col-md-4">
+              <h3>
+                  Submissions:
+              </h3>
+                <p>{{ stat_data['review_count'] }}</p>
+          </div>
+
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Assignments:
+              </h3>
+                <p>{{ stat_data['assign_count'] }}</p>
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Average Number of Words:
+              </h3>
+                <p>{{ stat_data['avg_words'] }}</p>
+        </div>
+        <div class="col-sm-6 col-md-4">
+              <h3>
+                  Average Number of Characters:
+              </h3>
+                <p>{{ stat_data['avg_chars'] }}</p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- cycle list -->
+    <div class="stat mb-5">
+    <h2 class="green">
+        <img src="{{url_for('static', filename='images/reviewer.png')}}" width="48" height="48"
+         class="d-inline-block align-top">
+        Score Distribution
+    </h2>
+
+        <div class="stat-plot">
+            <h3>Score Distribution</h3>
+            {{ score_dist_fig | safe }}
+        </div>
+    </div>
+
+{% endblock %}

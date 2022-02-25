@@ -14,7 +14,7 @@
 
 {% block styles %}
 <link rel="stylesheet"
-      href="{{url_for('static', filename='main.css')}}">
+      href="{{url_for('static', filename='css/main.css')}}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
       integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='images/ARR.png')}}">
@@ -23,7 +23,7 @@
 
 {% block navbar %}
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
   <div class="container">
   <a class="navbar-brand" href="/">
     <img src="{{url_for('static', filename='images/ARR.png')}}" width="30" height="30"
@@ -38,14 +38,14 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="/">Home </a>
+      <a class="nav-item nav-link" href="{{ url_for('main.stats') }}">Stats </a>
     </div>
       <!-- Review Search Form -->
-    <form class="d-flex" method="POST">
+    <form class="d-flex" action="{{ url_for('main.search_reviewer') }}" method="POST">
       {{ form.csrf_token }}
       {{ form.search_text(class='form-control mr-sm-2', placeholder='input reviewer name') }}
       {{ form.submit(class="btn btn-warning my-2 my-sm-0") }}
     </form>
-
   </div>
 
   </div>

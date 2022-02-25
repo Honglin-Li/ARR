@@ -1,7 +1,7 @@
 from wtforms.form import Form
-from wtforms.fields import StringField, SubmitField, SelectField, IntegerField
+from wtforms.fields import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length
-from app.const import MONTHS
+from app.utils.const import MONTHS
 from datetime import datetime
 
 

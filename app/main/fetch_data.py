@@ -6,7 +6,7 @@ import openreview
 from flask import current_app
 from datetime import datetime
 from app.main import main
-from app.const import MONTHS
+from app.utils.const import MONTHS
 
 
 @main.cli.command('fetch')

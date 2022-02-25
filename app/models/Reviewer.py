@@ -17,6 +17,14 @@ class Reviewer(db.Model):
     assignments = db.relationship('Assignment', backref='reviewer', lazy='dynamic')
 
     @property
+    def review_count(self):
+        return self.reviews.count()
+
+    @property
+    def assgin_count(self):
+        return self.assignments.count()
+
+    @property
     def avg_words_count(self):
         return db.session.query(func.avg(Review.word_len)).filter(Review.reviewer_id == self.id).one()
 
@@ -30,6 +38,10 @@ class Reviewer(db.Model):
         assignment_id_set = {ass.paper_id for ass in self.assignments}
         unfulfilled = review_id_set.difference(assignment_id_set)
         return unfulfilled
+
+    @staticmethod
+    def get_total_count():
+        return Reviewer.query.count()
 
 
 

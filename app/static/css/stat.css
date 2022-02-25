@@ -1,0 +1,9 @@
+/* stat box */
+.stat h2 { font-size: 34px; }
+.purple { color: #c2185b; }
+.blue { color: #303f9f; }
+.green { color: #00796b }
+.stat p {
+    color: #9b9b9b;
+    font-size: 28px;
+}
