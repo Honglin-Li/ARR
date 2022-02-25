@@ -16,8 +16,8 @@ The website implements access to data, basic functions, statistical information.
 ### running websete
 
 - install all the required packages and activate virtual env.
-- In Windows: open terminal, input command
-   - `set FLASK_APP=main.py`
+- Open terminal, input command
+   - For Windows, `set FLASK_APP=main.py`, for Mac,`export FLASK_APP=main.py`
    - `flask run`
 - open brower, visit http://127.0.0.1:5000/, then you can see the home page.
 
