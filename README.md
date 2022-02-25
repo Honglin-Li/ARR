@@ -1,24 +1,19 @@
-## Introduction
+[toc]
 
-[You can see the demo video here](https://youtu.be/fgjLEyevJqk)
+# Introduction
 
-This assignment implements the following functions.
+[You can see the demo video here](https://youtu.be/ASGLjmLZUbY)
 
-- fetch reviews, reviewers, review assignments for all papers across all rolling review cycles (May 2021 to Feb 2022)
-- Implements an interface to access data.
-   - home page: paginate all reviewers, click to visit reviewer page
-   - reviewer search bar： is in the navigation bar, so we can search reviewer on every page.
-   - reviewer page: shows 4 parts for a reviewer. reviewer name, statistics(number of reviews and assigned reviews, average word and character length of reviews), unfulfilled review assignments, and reviews.
+The website implements access to data, basic functions, statistical information. details as follows 
 
-Home Page:
+- **fetch reviews, reviewers, review assignments** for all papers across all rolling review cycles (May 2021 to Feb 2022)
+- **home page** - reviewer list: paginate all reviewers, click to visit reviewer page
+- **reviewer search bar**： is in the navigation bar, so we can search reviewer on every page.
+- **reviewer page**: shows 4 parts for a reviewer. reviewer name, statistics(number of reviews and assigned reviews, average word and character length of reviews), unfulfilled review assignments, and reviews.
+- **stats page**: shows overall statistics and plot. The style of the page refers to [ARR Statistics](http://stats.aclrollingreview.org/)
+- **stats by cycle page**: shows cycle statistics and overall assessment distribution plot.
 
-![Home Reviewer Page](https://upload-images.jianshu.io/upload_images/4613569-128b324cef8bf34e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-Reviewer Page:
-
-![Reviewer Page](https://upload-images.jianshu.io/upload_images/4613569-dfb4fd10c2eb7a1b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-## How to run the dashboard
+# How to run the dashboard
 
 ### running websete
 
@@ -38,13 +33,34 @@ the database is also in the github, so you can just use the it. If you want to f
 - run `flask review fetch` command, you can get all the data. This step needs hours.
 
 
-## Architecture
+# Architecture
 
 - website: python flask.
 - database: sqlite + SQLAlchemy
-- plot: Echarts + Pandas
+- plot: Plotly + Echarts + Pandas
 - UI: Bootstrap + CSS
 
 The code is structured as followering:
 
-![code structure](https://upload-images.jianshu.io/upload_images/4613569-ef506487df77da4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![structure.png](https://upload-images.jianshu.io/upload_images/4613569-30009d8d2c37dc06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# Web Pages
+
+1/4. Home Page(for reviewer list):
+
+![home.png](https://upload-images.jianshu.io/upload_images/4613569-8a80f83d30708a87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+2/4. Stats Page:
+![stats.png](https://upload-images.jianshu.io/upload_images/4613569-0b927f2c8978c8a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+3/4. Cycle Stats Page:
+![cycle.png](https://upload-images.jianshu.io/upload_images/4613569-b13dc08c266a3a15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+4/4. Reviewer Page(profile and reviews):
+
+![reviewer.png](https://upload-images.jianshu.io/upload_images/4613569-04cc9ea122534921.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+
+
+
