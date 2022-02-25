@@ -3,22 +3,21 @@
 {% from "bootstrap/pagination.html" import render_pagination %}
 
 {% block page_content %}
-    <!-- Search Bar -->
-
-
-
     <!-- Reviewers List -->
     {% if reviewers %}
     <!-- Show Reviewers List -->
     <div class="card-columns p-3">
         {% for reviewer in reviewers %}
-          <div class="reviewer card p-3 text-center">
+          <div class="card p-3 text-center arr-card bg-image hover-zoom">
             <div class="card-body">
               <h5 class="card-title">
                   <a href="{{ url_for('main.reviewer', reviewer_id=reviewer.id) }}">
                     {{ reviewer.name }}
                   </a>
               </h5>
+                <p class="card-text">
+                    Reviews &nbsp;{{ reviewer.review_count }}/Assignments &nbsp;{{ reviewer.assign_count }}
+                </p>
             </div>
           </div>
         {% endfor %}

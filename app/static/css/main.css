@@ -2,21 +2,26 @@
     height:100px;
 }
 
-/* Reviewer List */
-div.reviewer {
-    background-color:#fcf8f7;
+/* card group : for home page reviewer list & stats page cycle list fcf8f7 */
+.arr-card {
+    background: center white url("/static/images/card-bg.jpg");
 }
-div.reviewer a {
-    color:#8c1b13;
+.arr-card:hover {
+    opacity:0.6;
+    border-radius:30px;
 }
-div.reviewer:hover {
-    background-color:DodgerBlue;
-    color:white;
+.arr-card a {
+    color:#2c3a4a;
+    font-size:26px;
 }
-div.reviewer:hover a {
-    color:white;
+.arr-card .card-text {
+    font-size:18px;
+    margin:0;
+    color: #696880;
+}
+.arr-card:hover a {
+    color:#a32cc4;
     text-decoration-line:none;
-    font-weight: bold;
 }
 /* Pager */
 ul.pagination a {
@@ -67,8 +72,8 @@ ul.pagination a {
 /* Reviewer Profile */
 .reviewer-profile .card-header {
     font-weight:bold;
-    font-size:24px;
-    color:#8c1b13;
+    font-size:30px;
+    color:#2c3a4a;
 }
 .reviewer-profile .list-group-item {
     float:right;

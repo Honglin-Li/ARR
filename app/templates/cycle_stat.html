@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% from "bootstrap/pagination.html" import render_pagination %}
+{% block title %}ARR cycle {{ cycle }} statistics {% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -16,7 +17,7 @@
     <h2 class="purple">
         <img src="{{url_for('static', filename='images/review.png')}}" width="48" height="48"
          class="d-inline-block align-top">
-        Statistics
+        Statistics of &nbsp;{{ cycle }}
     </h2>
 
     <div class="row">
@@ -54,13 +55,12 @@
     <!-- cycle list -->
     <div class="stat mb-5">
     <h2 class="green">
-        <img src="{{url_for('static', filename='images/reviewer.png')}}" width="48" height="48"
+        <img src="{{url_for('static', filename='images/stat.png')}}" width="48" height="48"
          class="d-inline-block align-top">
-        Score Distribution
+        Overall Assessment Distribution
     </h2>
 
         <div class="stat-plot">
-            <h3>Score Distribution</h3>
             {{ score_dist_fig | safe }}
         </div>
     </div>

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% from "bootstrap/pagination.html" import render_pagination %}
+{% block title %}ARR statistics {% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -80,6 +81,9 @@
         </div>
     </div>
 
+        <h3 class="mt-3">The Number of Submissions and Assignments by Cycle</h3>
+        {{ fig | safe }}
+
     </div>
 
     <!-- cycle list -->
@@ -91,9 +95,10 @@
     </h2>
         <p class="text-muted">Click on the cycle you want to check more</p>
 
-    <div class="card-columns">
+    <div class="row">
         {% for cycle in cycles %}
-        <div class="card p-3">
+        <div class="col-sm-6 col-lg-4">
+        <div class="card arr-card p-1 mb-3">
             <div class="card-body">
               <h5 class="card-title">
                   <a href="{{ url_for('main.cycle_stats', cycle=cycle['cycle']) }}">
@@ -108,6 +113,7 @@
                 </p>
             </div>
           </div>
+            </div>
         {% endfor %}
     </div>
 

@@ -21,7 +21,7 @@ class Reviewer(db.Model):
         return self.reviews.count()
 
     @property
-    def assgin_count(self):
+    def assign_count(self):
         return self.assignments.count()
 
     @property

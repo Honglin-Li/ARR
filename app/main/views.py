@@ -7,6 +7,8 @@ from app.main.forms import ReviewSearchForm, YearMonthFilterForm
 from sqlalchemy import and_
 from app.utils.plot_data import PlotData
 import plotly.express as px
+import plotly.graph_objects as go
+from app.utils.const import MONTHS
 
 
 @main.route('/search', methods=['POST'])
@@ -75,7 +77,13 @@ def stats():
     # data for list & plot
     plot_df, cycles = PlotData.get_overall_plot_data()
 
-    return render_template('stat.html', form=form, stat_data=stat_data, cycles=cycles)
+    # plot
+    fig = px.line(plot_df, x='cycle', y='number', color='series', template='simple_white')
+    fig = fig.update_layout(hoverlabel_bgcolor='#fff')
+    fig = fig.update_traces(mode='lines+markers',
+                            marker_size=8, marker_symbol='circle-open', marker_line_width=3).to_html(full_html=False)
+
+    return render_template('stat.html', form=form, stat_data=stat_data, cycles=cycles, fig=fig)
 
 
 @main.route('/stats/<cycle>')
@@ -84,6 +92,8 @@ def cycle_stats(cycle):
 
     # prepare stats data
     year, month = cycle.split('-')
+    cycle = year + ' ' + MONTHS[month]
+    year, month = int(year), int(month)
 
     stat_data = {
         'review_count': Review.get_cycle_review_count(year, month),
@@ -92,8 +102,10 @@ def cycle_stats(cycle):
         'avg_chars': int(Review.get_avg_char_count(year, month)[0])
     }
     # get score distribution
-    score_dist_df = PlotData.get_score_distribution(2022, 1)
+    score_dist_df = PlotData.get_score_distribution(year, month)
     score_dist_fig = px.line(score_dist_df, x='score', y='number', template='simple_white')
-    score_dist_fig = score_dist_fig.update_traces(mode='lines+markers').to_html(full_html=False)
+    score_dist_fig = score_dist_fig.add_trace(go.Bar(x=score_dist_df['score'],
+                                                     y=score_dist_df['number'])).update_traces(showlegend=False)
+    score_dist_fig = score_dist_fig.to_html(full_html=False)
 
-    return render_template('cycle_stat.html', form=form, stat_data=stat_data, score_dist_fig=score_dist_fig)
+    return render_template('cycle_stat.html', form=form, stat_data=stat_data, score_dist_fig=score_dist_fig, cycle=cycle)

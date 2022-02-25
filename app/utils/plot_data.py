@@ -67,13 +67,13 @@ class PlotData:
         review_df['x'] = review_df.year.map(str) + '-' + review_df.month.map(str)
         review_count = review_df.x.value_counts()
 
-        y = map(str, PlotData.get_y(x, review_count))
+        y = [ str(item) for item in PlotData.get_y(x, review_count)]
 
         return { 'x': x, 'y': y}
 
     @staticmethod
     def get_score_distribution(year, month):
-        x = ['0.0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5']
+        x = ['0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5']
 
         # get overall assessment
         reviews = Review.query.filter(and_(Review.year == year, Review.month == month)).all()
@@ -109,10 +109,14 @@ class PlotData:
         review_y = PlotData.get_y(x, review_count)
         assign_y = PlotData.get_y(x, assign_count)
 
+        # card list data
         plot_df = pd.DataFrame({'cycle': x, 'submissions': review_y, 'assignments': assign_y})
-
-        # for cycle list
         list_df = plot_df[plot_df['submissions'] != 0].iloc[::-1]  # remove the cycles without any reviews
+
+        # plot data
+        df_r = pd.DataFrame({'cycle': x, 'number': review_y, 'series': 'submissions'})
+        df_a = pd.DataFrame({'cycle': x, 'number': assign_y, 'series': 'assignments'})
+        plot_df = pd.concat([df_r, df_a])
 
         return plot_df, list_df.to_dict('records')
 
