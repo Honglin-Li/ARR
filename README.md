@@ -28,7 +28,7 @@ the database is also in the github, so you can just use the it. If you want to f
 - `set FLASK_APP=main.py`
 - `flask shell`
 - `db.create_all()` to create a sqlite database
-- run `flask review fetch` command, you can get all the data. This step needs hours.
+- run `flask fetch` command, you can get all the data. This step needs hours.
 
 
 # Architecture
@@ -40,7 +40,7 @@ the database is also in the github, so you can just use the it. If you want to f
 
 The code is structured as followering:
 
-![structure.png](https://upload-images.jianshu.io/upload_images/4613569-30009d8d2c37dc06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![structure.png](https://upload-images.jianshu.io/upload_images/4613569-b1032b2d14b8169a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # Web Pages
 

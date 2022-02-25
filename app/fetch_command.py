@@ -7,10 +7,13 @@ from flask import current_app
 from datetime import datetime
 from app.main import main
 from app.utils.const import MONTHS
+import click
+from flask.cli import with_appcontext
 
 
-@main.cli.command('fetch')
-def fetch_arr():
+@click.command()
+@with_appcontext
+def fetch():
     """
     this function fetch all the review assignments and
     all the reviews for all the papers of all the cycles from 2021 May.
