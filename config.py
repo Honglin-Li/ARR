@@ -16,8 +16,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'arr.sqlite')
 
     # OpenReview
-    OR_USERNAME = os.environ.get('OR_USERNAME') or 'acielrollview@yahoo.com'
-    OR_PASSWORD = os.environ.get('OR_PASSWORD') or 'wWHv8tGwApzz7gH'
+    OR_USERNAME = os.environ.get('OR_USERNAME') or 'account@yahoo.com'
+    OR_PASSWORD = os.environ.get('OR_PASSWORD') or 'password_here'
 
     @staticmethod
     def init_app(app):
