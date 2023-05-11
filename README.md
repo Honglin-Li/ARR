@@ -1,5 +1,8 @@
 # Introduction
 
+
+The simple academic review website was implemented for a test for a job application.
+
 [You can see the demo video here](https://youtu.be/ASGLjmLZUbY)
 
 The website implements access to data, basic functions, statistical information. details as follows 
